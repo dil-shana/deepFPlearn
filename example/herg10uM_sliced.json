@@ -1,8 +1,8 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "example/data/herg_10uM_NN_sliced_minus2to2.csv",
-  "outputDir": "example/herg_10uM/train/comp_sliced",
-  "ecModelDir": "example/models/generic_encoder/",
+  "inputFile": "PycharmProjects/deepFPlearn/example/data/herg_10uM_NN_sliced_minus2to2.csv",
+  "outputDir": "PycharmProjects/generate_dfpl_regression_data/example/herg_10/train/",
+  "ecModelDir": "PycharmProjects/deepFPlearn/example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
   "fpSize": 2048,
