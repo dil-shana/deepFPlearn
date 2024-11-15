@@ -1,6 +1,6 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "data/herg_10uM_NN_sliced_minus2to2.csv",
+  "inputFile": "example/data/herg_10uM_NN_sliced_minus2to2.csv",
   "outputDir": "example/herg_10uM/train/comp_sliced",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
