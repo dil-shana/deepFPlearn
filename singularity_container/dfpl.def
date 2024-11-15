@@ -3,13 +3,13 @@ From: continuumio/miniconda3
 Stage: build
 
 %files
-    environment.yml
+    environment.yaml
 
 %post
   CONDA_DIR=/opt/conda/
 
   # prep environment
-  bash -c ". /etc/profile.d/conda.sh; conda env create -f environment.yml"
+  bash -c ". /etc/profile.d/conda.sh; conda env create -f environment.yaml"
 
   # Install conda-pack:
   bash -c ". /etc/profile.d/conda.sh; conda install -c conda-forge conda-pack"
