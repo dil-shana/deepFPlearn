@@ -1,0 +1,12 @@
+{
+  "py/object": "dfpl.options.Options",
+  "inputFile": "data/herg_1uM_NN_cleaned_iqr.csv",
+  "outputDir": "example/herg_1uM/predict/comp/",
+  "outputFile": "predict_data_AR.csv",
+  "ecModelDir": "example/models/generic_encoder",
+  "fnnModelDir": "example/herg_1uM/train/comp/AR_saved_model/",
+  "compressFeatures": true,
+  "trainAC": false,
+  "trainFNN": false,
+  "scalerFilePath": "example/herg_1uM/train/comp/scaler.pkl"
+}
