@@ -1,9 +1,8 @@
-program: /home/shanavas/PycharmProjects/deepFPlearn/dfpl/__main__.py
+program: dfpl 
 command:
-  - "/bin/bash"
-  - "-c"
-  - "source /home/shanavas/miniforge3/bin/activate /home/shanavas/miniforge3/envs/dfpl_env"
+  - ${env}
   - "/home/shanavas/miniforge3/envs/dfpl_env/bin/python" 
+  - "-m"  
   -  ${program} 
   -  "train"
   -  "-f" 
@@ -23,9 +22,7 @@ parameters:
     min: 0.00001
     max: 0.1
   batchSize:
-    distribution: int_uniform
-    min: 64
-    max: 2048
+    values: [64, 128, 256, 512]
   learningRate:
     distribution: uniform
     min: 0.00001

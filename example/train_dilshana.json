@@ -1,8 +1,8 @@
 {
   "py/object": "dfpl.options.Options",
   "inputFile": "PycharmProjects/deepFPlearn/example/data/herg_10uM_NN_sliced_minus2to2.csv",
-  "outputDir": "PycharmProjects/generate_dfpl_regression_data/example/herg_10/train/",
-  "ecModelDir": "PycharmProjects/deepFPlearn/example/models/generic_encoder/",
+  "outputDir": "/data/bioinf/projects/data/2024_invitrodb_data/dilshana/home/PyCharm/sweep",
+  "ecModelDir": "Pycharm/example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
   "fpSize": 2048,
@@ -11,17 +11,16 @@
   "verbose": 2,
   "trainAC": false,
   "trainFNN": true,
-  "compressFeatures": true,
-  "kFolds": 5,
+  "compressFeatures": false,
+  "kFolds": 1,
   "testSize": 0.2,
   "optimizer": "Adam",
+  "batchSize": 128,
   "lossFunction": "mse",
   "epochs": 5000,
-  "batchSize": 8 ,
   "activationFunction": "tanh",
-  "dropout": 0.05 ,
-  "learningRate" : 0.000005 ,
-  "l2reg" : 0.0 ,
   "fnnType": "REG",
-  "normalize" : true
+  "wabTracking": true
 }
+                                                                                                                    
+
