@@ -1,10 +1,10 @@
 {
   "py/object": "dfpl.options.Options",
   "inputFile": "data/herg_10uM_NN_sliced_minus2to2.csv",
-  "outputDir": "example/herg_10uM/predict/comp_sliced/",
+  "outputDir": "example/herg_10/predict/comp_sliced/",
   "outputFile": "predict_data_AR.csv",
   "ecModelDir": "example/models/generic_encoder",
-  "fnnModelDir": "example/herg_10uM/train/comp_sliced/AR_saved_model/",
+  "fnnModelDir": "example/herg_10/train/comp_sliced/AR_saved_model/",
   "compressFeatures": true,
   "trainAC": false,
   "trainFNN": false,
