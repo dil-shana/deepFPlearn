@@ -18,6 +18,9 @@ from dfpl import predictions
 from dfpl import single_label_model as sl
 sys.path.append("/home/shanavas/PycharmProjects/deepFPlearn/dfpl/")
 from dfpl.normalization import normalize_acc_values, inverse_transform_predictions #Dilshana
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 project_directory = pathlib.Path(".").parent.parent.absolute()
 test_train_opts = options.Options(
@@ -88,7 +91,7 @@ def train(opts: options.Options):
         df = ac.compress_fingerprints(df, encoder)
 
     if opts.normalize:
-        df, scaler_path = normalize_acc_values(df, column_name='AR', output_dir=opts.outputDir)
+        df, scaler_path = normalize_acc_values(df, column_name='actual', output_dir=opts.outputDir)
 
     if opts.trainFNN:
         # train single label models
@@ -120,6 +123,8 @@ def predict(opts: options.Options) -> None:
     # predict
     df2 = predictions.predict_values(df=df,opts=opts)
 
+    use_denormalized = False
+
     scaler_path = None
     if opts.scalerFilePath:
         scaler_path = opts.scalerFilePath
@@ -136,6 +141,38 @@ def predict(opts: options.Options) -> None:
             logging.warning(f"Scaler file not found at {scaler_path}. Skipping normalization step.")
     else:
         logging.warning("Normalization is enabled but scalerFilePath is not provided in the options. Skipping normalization step.")
+
+
+
+    # Use actual and predicted values for evaluation and plot
+    y_actual = df2['actual'].values  # Replace 'actual' with the correct column name in your dataset
+    y_predicted = df2['predicted'].values
+
+    # Calculate R²
+    ss_res = np.sum((y_actual - y_predicted) ** 2)
+    ss_tot = np.sum((y_actual - np.mean(y_actual)) ** 2)
+    r2 = 1 - (ss_res / (ss_tot + np.finfo(float).eps))  # Add small epsilon to avoid division by zero
+    logging.info(f"Calculated R² for {'denormalized' if use_denormalized else 'direct'} predictions: {r2:.4f}")
+
+    # Save R² to a file
+    r2_file = os.path.join(opts.outputDir, "r2_score.txt")
+    with open(r2_file, "w") as f:
+        f.write(f"R² Score ({'denormalized' if use_denormalized else 'direct'}): {r2:.4f}\n")
+    logging.info(f"R² score saved to {r2_file}")
+
+    # Generate and save the plot of predictions vs. actual
+    plt.figure(figsize=(8, 6))
+    plt.scatter(y_actual, y_predicted, alpha=0.6, label=f'R² = {r2:.4f}')
+    plt.plot([min(y_actual), max(y_actual)], [min(y_actual), max(y_actual)], color='red', linestyle='--', label="Ideal Fit")
+    plt.xlabel("Actual Values")
+    plt.ylabel("Predicted Values")
+    plt.title(f"Predicted vs. Actual Values ")
+    plt.legend()
+    plot_file = os.path.join(opts.outputDir, "prediction_vs_actual.png")
+    plt.savefig(plot_file)
+    plt.close()
+    logging.info(f"Prediction vs. actual plot saved to {plot_file}")
+
     names_columns = [c for c in df2.columns if c not in ['fp', 'fpcompressed']]
 
     df2[names_columns].to_csv(path_or_buf=path.join(opts.outputDir, opts.outputFile))

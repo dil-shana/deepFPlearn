@@ -4,7 +4,7 @@
   "outputDir": "/home/shanavas/PycharmProjects/generate_dfpl_regression_data/example/cytotox/new/predict_2/",
   "ecModelDir": "example/models/generic_encoder/",
   "outputFile": "predict_data.csv",
-  "fnnModelDir": "example/cytotox/new/train_2/AR_saved_model/",
+  "fnnModelDir": "example/cytotox/new/train_2/actual_saved_model/",
   "compressFeatures": true,
   "trainAC": false,
   "trainFNN": false,

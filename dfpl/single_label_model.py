@@ -24,6 +24,7 @@ from tensorflow.keras import regularizers
 from tensorflow.keras.layers import Dense, Dropout, AlphaDropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.models import Sequential
+import tensorflow.keras.backend as K
 
 from dfpl import callbacks as cb
 from dfpl import options
@@ -244,6 +245,7 @@ def build_regression_network(input_size: int, opts: options.Options, output_bias
     return model
 
 
+
 def define_single_label_model(input_size: int, opts: options.Options, output_bias=None) -> Model:
     if opts.lossFunction == "bce":
         loss_function = losses.BinaryCrossentropy()
@@ -342,14 +344,20 @@ def evaluate_regression_model(x_test: np.ndarray, y_test: np.ndarray,file_prefix
     error = np.array(y_predict) - np.array(y_test)
     abs_error = abs(error)
 
-    regression_metrics = ['MSE', 'MAE', 'MdAE', 'ACPER', 'MAPE', 'RMSE']
+     # Compute R² (coefficient of determination)
+    ss_res = np.sum((y_test - y_predict) ** 2)  # Residual sum of squares
+    ss_tot = np.sum((y_test - np.mean(y_test)) ** 2)  # Total sum of squares
+    r2 = 1 - (ss_res / (ss_tot + np.finfo(float).eps))  # Add small epsilon to avoid division by zero
+
+    regression_metrics = ['MSE', 'MAE', 'MdAE', 'ACPER', 'MAPE', 'RMSE','R2']
     metric_values = [
         np.mean(abs_error ** 2, axis=0),
         np.mean(abs_error, axis=0),
         np.median(abs_error, axis=0),
         sum(list(acper(y_true=y_test, y_pred=y_predict, t=threshold))) / len(y_test),
         np.mean(abs_error / np.array(y_test), axis=0),
-        np.sqrt(np.mean(abs_error ** 2, axis=0))
+        np.sqrt(np.mean(abs_error ** 2, axis=0)),
+        r2 #R2
     ]
 
     return pd.DataFrame({'metric': regression_metrics, 'value': metric_values, 'fold': fold, 'target': target})
@@ -475,10 +483,47 @@ def fit_and_evaluate_model(x_train: np.ndarray, x_test: np.ndarray, y_train: np.
    # save_split_data(x_train, x_test, y_train, y_test, fold=fold, target=target,opts=opts)
 
     if opts.fnnType == 'REG':
+
+        # Predict train and test
+        y_train_pred = callback_model.predict(x_train).flatten()
+        y_test_pred = callback_model.predict(x_test).flatten()
+
+
         pl.plot_loss(hist=hist, file=f"{model_file_prefix}.history.jpg")
         performance = evaluate_regression_model(x_test=x_test, y_test=y_test, file_prefix=model_file_prefix,
                                                 model=callback_model,
                                                 target=target, fold=fold)
+
+                # RMSE calculations
+        rmse_train = np.sqrt(np.mean((y_train - y_train_pred) ** 2))
+        rmse_test = np.sqrt(np.mean((y_test - y_test_pred) ** 2))
+
+        # R² calculations
+        ss_res_train = np.sum((y_train - y_train_pred) ** 2)
+        ss_tot_train = np.sum((y_train - np.mean(y_train)) ** 2)
+        r2_train = 1 - (ss_res_train / (ss_tot_train + np.finfo(float).eps))
+
+        ss_res_test = np.sum((y_test - y_test_pred) ** 2)
+        ss_tot_test = np.sum((y_test - np.mean(y_test)) ** 2)
+        r2_test = 1 - (ss_res_test / (ss_tot_test + np.finfo(float).eps))
+
+        # Save metrics to a separate file
+        metrics_file = f"{model_file_prefix}.metrics.csv"
+        metrics_df = pd.DataFrame({
+            "Dataset": ["Train", "Test"],
+            "RMSE": [rmse_train, rmse_test],
+            "R²": [r2_train, r2_test]
+        })
+        metrics_df.to_csv(metrics_file, index=False)
+        logging.info(f"Metrics saved to {metrics_file}")
+
+
+        # Plot predictions vs. actual for both train and test
+        y_train_pred = callback_model.predict(x_train).flatten()
+        y_test_pred = callback_model.predict(x_test).flatten()
+        pl.plot_predictions_vs_actual(y_train, y_train_pred, y_test, y_test_pred,
+                                       file=f"{model_file_prefix}.predicted_vs_actual.png")
+
 
     else:
         pl.plot_history(history=hist, file=f"{model_file_prefix}.history.svg")

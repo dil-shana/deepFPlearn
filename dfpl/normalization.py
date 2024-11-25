@@ -5,7 +5,7 @@ import pickle
 from sklearn.preprocessing import MinMaxScaler
 
 
-def normalize_acc_values(df, column_name='AR', output_dir='.'):
+def normalize_acc_values(df, column_name='actual', output_dir='.'):
     """
     Normalize ACC values in the dataframe and save the scaler.
 

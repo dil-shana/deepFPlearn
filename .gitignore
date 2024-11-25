@@ -24,6 +24,8 @@ example/predict/old
 example/predict/normalisation
 example/predict/compressed_sweep_normal
 example/sweep-results*
+example/*/*train*
+example/*/*/*train*
 release_asset
 LICENSE.docx
 wandb

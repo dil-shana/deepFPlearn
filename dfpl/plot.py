@@ -5,10 +5,45 @@ import pandas as pd
 # for NN model functions
 from tensorflow.keras.callbacks import History
 from matplotlib.axes import Axes
-
+import numpy as np
 
 # for testing in Weights & Biases
 
+
+def plot_predictions_vs_actual(y_train: np.ndarray, y_train_pred: np.ndarray,
+                               y_test: np.ndarray, y_test_pred: np.ndarray, file: str) -> None:
+    """
+    Plot predicted vs. actual values for both training and testing datasets.
+
+    :param y_train: Actual values for the training dataset
+    :param y_train_pred: Predicted values for the training dataset
+    :param y_test: Actual values for the testing dataset
+    :param y_test_pred: Predicted values for the testing dataset
+    :param file: The filename to save the plot
+    """
+    plt.figure(figsize=(8, 6))
+
+    # Plot training data
+    plt.scatter(y_train, y_train_pred, color='blue', alpha=0.6, label='Train Data')
+
+    # Plot testing data
+    plt.scatter(y_test, y_test_pred, color='orange', alpha=0.6, label='Test Data')
+
+    # Plot the ideal fit line
+    min_val = min(min(y_train), min(y_test))
+    max_val = max(max(y_train), max(y_test))
+    plt.plot([min_val, max_val], [min_val, max_val], color='red', linestyle='--', label="Ideal Fit")
+
+    # Add labels, title, and legend
+    plt.xlabel("Actual Values")
+    plt.ylabel("Predicted Values")
+    plt.title("Predicted vs. Actual Values")
+    plt.legend()
+
+    # Save the plot
+    plt.tight_layout()
+    plt.savefig(file)
+    plt.close()
 
 def get_max_validation_accuracy(history: History) -> str:
     validation = smooth_curve(history.history['val_accuracy'])
