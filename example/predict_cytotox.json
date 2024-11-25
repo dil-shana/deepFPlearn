@@ -1,0 +1,12 @@
+{
+  "py/object": "dfpl.options.Options",
+  "inputFile": "/home/shanavas/PycharmProjects/generate_dfpl_regression_data/data/cytoxicity_zscore.csv",
+  "outputDir": "/home/shanavas/PycharmProjects/generate_dfpl_regression_data/example/cytotox/new/predict_2/",
+  "ecModelDir": "example/models/generic_encoder/",
+  "outputFile": "predict_data.csv",
+  "fnnModelDir": "example/cytotox/new/train_2/AR_saved_model/",
+  "compressFeatures": true,
+  "trainAC": false,
+  "trainFNN": false,
+  "scalerFilePath": "example/cytotox/new/train_2/scaler.pkl"
+}
