@@ -257,7 +257,7 @@ def parseInputTrain(parser: argparse.ArgumentParser) -> None:
     parser.add_argument('--lossFunction',
                         metavar="character",
                         type=str,
-                        choices=["rmse", "mse", "bce"],
+                        choices=["rmse", "mse", "bce","Huber"],
                         help="Loss function to use during training. "
                              "mse - mean squared error, bce - binary cross entropy.",
                         default=argparse.SUPPRESS)

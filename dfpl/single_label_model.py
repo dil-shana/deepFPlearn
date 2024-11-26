@@ -253,7 +253,8 @@ def define_single_label_model(input_size: int, opts: options.Options, output_bia
         loss_function = losses.MeanSquaredError()
     elif opts.lossFunction == 'mae':
         loss_function = losses.MeanAbsoluteError()
-
+    elif opts.lossFunction == 'Huber':
+        loss_function = losses.Huber()
     else:
         logging.error(f"Your selected loss is not supported: {opts.lossFunction}.")
         sys.exit("Unsupported loss function")
@@ -632,16 +633,38 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                 test_indices_list.to_csv(os.path.join(opts.outputDir, f"test_fold_{fold_no}.csv"),index=False,header=["Test Index"])
                 fold_no += 1
 
+        metrics_df = pd.concat(performance_list, ignore_index=True)
+        print(metrics_df)
 
         # select and copy best model - how to define the best model?
         if opts.fnnType == 'REG':
-            best_fold = (
-                pd.concat(
-                    performance_list, ignore_index=True).sort_values(
-                    by=['value'],
-                    ascending=False,
-                    ignore_index=True)['fold'][0]
-            )
+            # Filter folds with positive R²
+            positive_r2_folds = metrics_df[(metrics_df["metric"] == "R2") & (metrics_df["value"] > 0)]['fold'].unique()
+
+            # Debugging: Log positive R² folds
+            logging.debug(f"Positive R² Folds: {positive_r2_folds}")
+
+            if len(positive_r2_folds) > 0:
+                # Rank positive R² folds by RMSE
+                #filtered_metrics = metrics_df[(metrics_df["fold"].isin(positive_r2_folds)) & (metrics_df["metric"] == "RMSE")]
+                filtered_metrics = metrics_df[(metrics_df["fold"].isin(positive_r2_folds)) & (metrics_df["metric"] == "R2")]
+                #best_fold = metrics_df[metrics_df["metric"] == "R2"].sort_values(by="value", ascending=True).iloc[0]["fold"]
+                best_fold = filtered_metrics.sort_values(by="value", ascending=False).iloc[0]["fold"]
+                logging.info(f"Best fold selected: {best_fold}")
+            else:
+                # Fallback: Use all folds and rank by RMSE
+                logging.warning("No folds with positive R². Falling back to ranking all folds by RMSE.")
+                best_fold = metrics_df[metrics_df["metric"] == "RMSE"].sort_values(by="value", ascending=True).iloc[0]["fold"]
+
+
+
+            #best_fold = (
+             #   pd.concat(
+             #       performance_list, ignore_index=True).sort_values(
+              #      by=['value'],
+              #      ascending=False,
+              #      ignore_index=True)['fold'][0]
+            #)
         else:
             best_fold = (
                 pd.concat(
