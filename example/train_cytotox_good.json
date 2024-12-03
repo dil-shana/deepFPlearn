@@ -1,7 +1,7 @@
 {
   "py/object": "dfpl.options.Options",
   "inputFile": "/home/shanavas/PycharmProjects/generate_dfpl_regression_data/data/cytoxicity_zscore.csv",
-  "outputDir": "example/cytotox/new/train_trail",
+  "outputDir": "example/cytotox/new/train_comp5",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
@@ -17,11 +17,11 @@
   "optimizer": "Adam",
   "lossFunction": "Huber",
   "epochs": 5000,
-  "batchSize": 128 ,
+  "batchSize": 32 ,
   "activationFunction": "tanh",
-  "dropout":  0.06600139458057926 ,
-  "learningRate" : 0.0008753463402134107 ,
-  "l2reg" :   0.00007087829555603556,
+  "dropout":  0.05 ,
+  "learningRate" : 0.00001 ,
+  "l2reg" :   0.001,
   "fnnType": "REG",
   "normalize" : true
 }

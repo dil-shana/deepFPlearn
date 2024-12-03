@@ -21,6 +21,7 @@ from dfpl.normalization import normalize_acc_values, inverse_transform_predictio
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import r2_score
 
 project_directory = pathlib.Path(".").parent.parent.absolute()
 test_train_opts = options.Options(

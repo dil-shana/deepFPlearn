@@ -25,12 +25,13 @@ from tensorflow.keras.layers import Dense, Dropout, AlphaDropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.models import Sequential
 import tensorflow.keras.backend as K
+from verstack import stratified_continuous_split
 
 from dfpl import callbacks as cb
 from dfpl import options
 from dfpl import plot as pl
 from dfpl import settings
-
+import wandb
 
 def sample_down_data(opts: options.Options, df: pd.DataFrame, target: str, column: str) -> (np.ndarray,
                                                                                             np.ndarray):
@@ -315,7 +316,27 @@ def acper(y_true, y_pred, t: float = 0.02):
             yield True
         else:
             yield False
+#def calculate_r2(y_true, y_pred,t: float = 0.02 ):
+ #   ss_res = K.sum(K.square(y_true - y_pred))
+ #   ss_tot = K.sum(K.square(y_true - K.mean(y_true)))
+ #   return 1 - ss_res / (ss_tot + K.epsilon())
+def calculate_r2(y_true, y_pred):
+    """
+    Calculate R² (coefficient of determination) manually.
 
+    :param y_true: Array of true values
+    :param y_pred: Array of predicted values
+    :return: R² value
+    """
+    # Residual sum of squares (SS_res)
+    ss_res = np.sum((y_true - y_pred) ** 2)
+
+    # Total sum of squares (SS_tot)
+    ss_tot = np.sum((y_true - np.mean(y_true)) ** 2)
+
+    # Calculate R²
+    r2 = 1 - (ss_res / (ss_tot + np.finfo(float).eps))  # Add small epsilon to avoid division by zero
+    return r2
 
 def evaluate_regression_model(x_test: np.ndarray, y_test: np.ndarray,file_prefix: str, model: Model,
                               target: str, fold: int, threshold: float = 0.05) -> pd.DataFrame:
@@ -346,9 +367,10 @@ def evaluate_regression_model(x_test: np.ndarray, y_test: np.ndarray,file_prefix
     abs_error = abs(error)
 
      # Compute R² (coefficient of determination)
-    ss_res = np.sum((y_test - y_predict) ** 2)  # Residual sum of squares
-    ss_tot = np.sum((y_test - np.mean(y_test)) ** 2)  # Total sum of squares
-    r2 = 1 - (ss_res / (ss_tot + np.finfo(float).eps))  # Add small epsilon to avoid division by zero
+   # ss_res = np.sum((y_test - y_predict) ** 2)  # Residual sum of squares
+  #  ss_tot = np.sum((y_test - np.mean(y_test)) ** 2)  # Total sum of squares
+  #  r2 = 1 - (ss_res / (ss_tot + np.finfo(float).eps))  # Add small epsilon to avoid division by zero
+    r2=calculate_r2(y_test, y_predict)
 
     regression_metrics = ['MSE', 'MAE', 'MdAE', 'ACPER', 'MAPE', 'RMSE','R2']
     metric_values = [
@@ -500,13 +522,14 @@ def fit_and_evaluate_model(x_train: np.ndarray, x_test: np.ndarray, y_train: np.
         rmse_test = np.sqrt(np.mean((y_test - y_test_pred) ** 2))
 
         # R² calculations
-        ss_res_train = np.sum((y_train - y_train_pred) ** 2)
-        ss_tot_train = np.sum((y_train - np.mean(y_train)) ** 2)
-        r2_train = 1 - (ss_res_train / (ss_tot_train + np.finfo(float).eps))
-
-        ss_res_test = np.sum((y_test - y_test_pred) ** 2)
-        ss_tot_test = np.sum((y_test - np.mean(y_test)) ** 2)
-        r2_test = 1 - (ss_res_test / (ss_tot_test + np.finfo(float).eps))
+        #ss_res_train = np.sum((y_train - y_train_pred) ** 2)
+       # ss_tot_train = np.sum((y_train - np.mean(y_train)) ** 2)
+        #r2_train = 1 - (ss_res_train / (ss_tot_train + np.finfo(float).eps))
+        r2_train = calculate_r2(y_train, y_train_pred)
+        r2_test  = calculate_r2(y_test, y_test_pred)
+       # ss_res_test = np.sum((y_test - y_test_pred) ** 2)
+        #ss_tot_test = np.sum((y_test - np.mean(y_test)) ** 2)
+       # r2_test = 1 - (ss_res_test / (ss_tot_test + np.finfo(float).eps))
 
         # Save metrics to a separate file
         metrics_file = f"{model_file_prefix}.metrics.csv"
@@ -517,6 +540,15 @@ def fit_and_evaluate_model(x_train: np.ndarray, x_test: np.ndarray, y_train: np.
         })
         metrics_df.to_csv(metrics_file, index=False)
         logging.info(f"Metrics saved to {metrics_file}")
+
+
+        # Log metrics to W&B
+        wandb.log({
+        "Train RMSE": rmse_train,
+        "Test RMSE": rmse_test,
+        "Train R²": r2_train,
+        "Test R²": r2_test
+        })
 
 
         # Plot predictions vs. actual for both train and test
@@ -592,6 +624,13 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                                                                 stratify=split_stratify,
                                                                 test_size=opts.testSize,
                                                                 random_state=split_random_state)
+
+            #x_train, x_test, y_train, y_test = stratified_continuous_split(x, y,
+            #                                                    stratify=target,
+            #                                                    test_size=opts.testSize,
+            #                                                    train_size= 1-test_size,
+               #                                                 continuous=True,
+               #                                                 random_state=split_random_state)
 
             performance = fit_and_evaluate_model(x_train=x_train, x_test=x_test,
                                                  y_train=y_train, y_test=y_test,

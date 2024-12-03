@@ -6,9 +6,10 @@ command:
   -  ${program} 
   -  "train"
   -  "-f" 
-  -  "/home/shanavas/PycharmProjects/deepFPlearn/example/dilshana-sweep-trial/cytotox.json"
+  -  "/home/shanavas/PycharmProjects/deepFPlearn/example/dilshana-sweep-trial/trial_sweep.json"
   -  ${args}
 method: random
+
 metric:
   name: val_loss
   goal: minimize
@@ -26,7 +27,9 @@ parameters:
     min: 0.0001
     max: 0.001
   batchSize:  # For batch size, it’s better to choose from discrete values
-    values: [32, 64, 128, 256, 512]
+    values: [32, 64, 128]
   wabTarget:
-    value: AR
+    value: actual
+
+
 
