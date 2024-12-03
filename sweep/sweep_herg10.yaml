@@ -1,0 +1,32 @@
+program: dfpl 
+command:
+  - ${env}
+  - "/home/shanavas/miniforge3/envs/dfpl_env/bin/python" 
+  - "-m"  
+  -  ${program} 
+  -  "train"
+  -  "-f" 
+  -  "/home/shanavas/PycharmProjects/deepFPlearn/example/dilshana-sweep-trial/herg_10_sliced.json"
+  -  ${args}
+method: random
+metric:
+  name: val_loss
+  goal: minimize
+parameters:
+  dropout:
+    distribution: uniform
+    min: 0.001
+    max: 0.4
+  l2reg:
+    distribution: uniform
+    min: 0.000001
+    max: 0.00001
+  batchSize:
+    values: [32,64,128]
+  learningRate:
+    distribution: uniform
+    min: 0.000001
+    max: 0.0005  
+  wabTarget:
+    value: AR
+

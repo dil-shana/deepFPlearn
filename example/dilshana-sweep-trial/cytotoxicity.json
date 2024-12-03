@@ -1,0 +1,23 @@
+{
+"py/object": "dfpl.options.Options",
+"inputFile": "/home/shanavas/PycharmProjects/deepFPlearn/example/data/cytoxicity_zscore.csv",
+"outputDir": "/data/bioinf/projects/data/2024_invitrodb_data/dilshana/home/PyCharm/sweep/trial",
+"ecModelDir": "/home/shanavas/PycharmProjects/deepFPlearn/example/models/generic_encoder/",
+"type": "smiles",
+"fpType": "topological",
+"fpSize": 2048,
+"encFPSize": 256,
+"enableMultiLabel": false,
+"verbose": 2,
+"trainAC": false,
+"trainFNN": true,
+"compressFeatures": true,
+"kFolds": 5,
+"testSize": 0.2,
+"optimizer": "Adam",
+"lossFunction": "mse",
+"epochs": 5000,
+"fnnType": "REG",
+"wabTracking": true
+}
+
