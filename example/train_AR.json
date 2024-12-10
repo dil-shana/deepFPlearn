@@ -1,7 +1,7 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "data/herg_10uM_NN_sliced_minus0_5to0_5_cleaned.csv",
-  "outputDir": "example/herg_10/train_0_5/",
+  "inputFile": "example/filtered_data_AR.csv",
+  "outputDir": "example/AR/new/train_2",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
@@ -17,11 +17,11 @@
   "optimizer": "Adam",
   "lossFunction": "Huber",
   "epochs": 5000,
-  "batchSize": 64 ,
-  "activationFunction": "selu",
-  "dropout": 0.1,
-  "learningRate" : 0.00001,
-  "l2reg" : 0.0,
+  "batchSize": 64,
+  "activationFunction": "tanh",
+  "dropout":  0.01 ,
+  "learningRate" : 0.0005,
+  "l2reg" :   0.001,
   "fnnType": "REG",
-  "normalize" : false
+  "normalize" : true
 }

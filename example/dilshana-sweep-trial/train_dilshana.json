@@ -1,7 +1,7 @@
 {
 "py/object": "dfpl.options.Options",
 "inputFile": "/home/shanavas/PycharmProjects/deepFPlearn/example/data/herg_10uM_NN_sliced_minus2to2.csv",
-"outputDir": "/data/bioinf/projects/data/2024_invitrodb_data/dilshana/home/PyCharm/sweep/trial",
+"outputDir": "example/herg_10/wandb",
 "ecModelDir": "/home/shanavas/PycharmProjects/deepFPlearn/example/models/generic_encoder/",
 "type": "smiles",
 "fpType": "topological",

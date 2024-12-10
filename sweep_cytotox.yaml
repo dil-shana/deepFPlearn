@@ -9,7 +9,6 @@ command:
   -  "/home/shanavas/PycharmProjects/deepFPlearn/example/dilshana-sweep-trial/trial_sweep.json"
   -  ${args}
 method: random
-
 metric:
   name: val_loss
   goal: minimize
