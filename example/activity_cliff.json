@@ -1,7 +1,7 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "data/herg_10uM_NN_sliced_0_5to1.csv",
-  "outputDir": "example/herg_10/train_0_5to1_uncomp/",
+  "inputFile": "data/activity_cliff/molecule_data_clean_outliersremoved.csv",
+  "outputDir": "example/activity_cliff/train3",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
@@ -15,13 +15,13 @@
   "kFolds": 5,
   "testSize": 0.2,
   "optimizer": "Adam",
-  "lossFunction": "Huber",
+  "lossFunction": "mse",
   "epochs": 5000,
-  "batchSize": 64 ,
-  "activationFunction": "selu",
-  "dropout": 0.2,
-  "learningRate" : 0.00001,
-  "l2reg" : 0.01,
+  "batchSize": 128 ,
+  "activationFunction": "tanh",
+  "dropout": 0.1,
+  "learningRate" : 0.0001,
+  "l2reg" : 0.0,
   "fnnType": "REG",
-  "normalize" : false
+  "normalize" : true
 }
