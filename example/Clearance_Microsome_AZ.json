@@ -19,7 +19,7 @@
   "epochs": 10000,
   "batchSize": 32 ,
   "activationFunction": "tanh",
-  "dropout": 0.01 ,
+  "dropout": 0.1 ,
   "learningRate" : 0.0001 ,
   "l2reg" : 0.00001 ,
   "fnnType": "REG",
