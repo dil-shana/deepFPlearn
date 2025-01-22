@@ -1,7 +1,7 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "example/filtered_data_AR.csv",
-  "outputDir": "example/AR/new/train_2",
+  "inputFile": "data/processed_smiles_modified_zscore_dilshana-ar.csv",
+  "outputDir": "example/fits/AR/new/train_preproc/",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
