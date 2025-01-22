@@ -1,7 +1,7 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "data/processed_smiles_modified_zscore_dilshana-ar.csv",
-  "outputDir": "example/fits/AR/new/train_preproc_uncomp/",
+  "inputFile": "data/tdc/Solubility_AqSolDB_nn.csv",
+  "outputDir": "example/Solubility_AqSolDB/train/comp",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
@@ -11,17 +11,19 @@
   "verbose": 2,
   "trainAC": false,
   "trainFNN": true,
-  "compressFeatures": false,
+  "compressFeatures": true,
   "kFolds": 5,
   "testSize": 0.2,
   "optimizer": "Adam",
-  "lossFunction": "Huber",
-  "epochs": 5000,
-  "batchSize": 64,
+  "lossFunction": "mse",
+  "epochs": 10000,
+  "batchSize": 128 ,
   "activationFunction": "tanh",
-  "dropout":  0.01 ,
-  "learningRate" : 0.0005,
-  "l2reg" :   0.001,
+  "dropout": 0.1 ,
+  "learningRate" : 0.0001,
+  "l2reg" : 0.00001 ,
   "fnnType": "REG",
   "normalize" : true
 }
+
+
