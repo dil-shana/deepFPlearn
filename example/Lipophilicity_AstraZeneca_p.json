@@ -1,0 +1,12 @@
+{
+  "py/object": "dfpl.options.Options",
+  "inputFile": "data/tdc/Lipophilicity_AstraZeneca_nn.csv",
+  "outputDir": "example/Lipophilicity_AstraZeneca/predict/comp_1",
+  "outputFile": "predict_data.csv",
+  "ecModelDir": "example/models/generic_encoder",
+  "fnnModelDir": "example/Lipophilicity_AstraZeneca/train/comp_1/actual_saved_model/",
+  "compressFeatures": true,
+  "trainAC": false,
+  "trainFNN": false,
+  "scalerFilePath": "example/Lipophilicity_AstraZeneca/train/comp_1/scaler.pkl"
+}

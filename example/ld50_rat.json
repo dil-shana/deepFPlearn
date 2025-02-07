@@ -18,10 +18,10 @@
   "lossFunction": "mse",
   "epochs": 5000,
   "batchSize": 32 ,
-  "activationFunction": "selu",
-  "dropout": 0.1 ,
-  "learningRate" : 0.0001 ,
-  "l2reg" : 0.0001 ,
+  "activationFunction": "tanh",
+  "dropout": 0.1452792395273867 ,
+  "learningRate" : 0.00004978418552996881 ,
+  "l2reg" : 0.0001039925685157524 ,
   "fnnType": "REG",
   "normalize" : true
 }

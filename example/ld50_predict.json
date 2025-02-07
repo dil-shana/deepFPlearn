@@ -1,0 +1,12 @@
+{
+  "py/object": "dfpl.options.Options",
+  "inputFile": "data/Zhu_LD50_rat.csv",
+  "outputDir": "example/Zhu_LD50/predict/comp_2/",
+  "outputFile": "predict_data_AR.csv",
+  "ecModelDir": "example/models/generic_encoder",
+  "fnnModelDir": "example/Zhu_LD50/train/comp_2/actual_saved_model/",
+  "compressFeatures": true,
+  "trainAC": false,
+  "trainFNN": false,
+  "scalerFilePath": "example/Zhu_LD50/train/comp_2/scaler.pkl"
+}

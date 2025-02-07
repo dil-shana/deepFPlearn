@@ -1,0 +1,12 @@
+{
+  "py/object": "dfpl.options.Options",
+  "inputFile": "data/tdc/Solubility_AqSolDB_nn.csv",
+  "outputDir": "example/Solubility_AqSolDB/predict/comp_1",
+  "outputFile": "predict_data.csv",
+  "ecModelDir": "example/models/generic_encoder",
+  "fnnModelDir": "example/Solubility_AqSolDB/train/comp_1/actual_saved_model/",
+  "compressFeatures": true,
+  "trainAC": false,
+  "trainFNN": false,
+  "scalerFilePath": "example/Solubility_AqSolDB/train/comp_1/scaler.pkl"
+}

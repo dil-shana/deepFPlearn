@@ -19,9 +19,9 @@
   "epochs": 10000,
   "batchSize": 32 ,
   "activationFunction": "selu",
-  "dropout": 0.171741112784108 ,
-  "learningRate" : 0.00009113596389897592 ,
-  "l2reg" : 0.00001025217593625231 ,
+  "dropout": 0.20657523733161737 ,
+  "learningRate" : 0.00001464859181993064 ,
+  "l2reg" : 0.0008736620242586098 ,
   "fnnType": "REG",
   "normalize" : true
 }

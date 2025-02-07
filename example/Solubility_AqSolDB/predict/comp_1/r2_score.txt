@@ -1,0 +1,1 @@
+R² Score (direct): 0.7086

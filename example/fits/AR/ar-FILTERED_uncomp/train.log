@@ -1,0 +1,6 @@
+2025-02-04 12:45:15,980 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 12:46:00,809 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 12:46:41,828 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 12:47:39,211 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 12:48:30,464 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 12:49:12,369 - tensorflow - INFO - Assets written to: /home/shanavas/PycharmProjects/deepFPlearn/example/fits/AR/ar-FILTERED_uncomp/actual_saved_model/assets

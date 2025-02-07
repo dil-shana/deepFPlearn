@@ -1,6 +1,6 @@
 {
 "py/object": "dfpl.options.Options",
-"inputFile": "/home/shanavas/PycharmProjects/deepFPlearn/example/data//Lipophilicity_AstraZeneca_nn.csv",
+"inputFile": "/home/shanavas/PycharmProjects/deepFPlearn/data/tdc/Lipophilicity_AstraZeneca_nn.csv",
 "outputDir": "/data/bioinf/projects/data/2024_invitrodb_data/dilshana/home/PyCharm/sweep/trial",
 "ecModelDir": "/home/shanavas/PycharmProjects/deepFPlearn/example/models/generic_encoder/",
 "type": "smiles",
@@ -12,7 +12,7 @@
 "trainAC": false,
 "trainFNN": true,
 "compressFeatures": true,
-"kFolds": 1,
+"kFolds": 5,
 "testSize": 0.2,
 "optimizer": "Adam",
 "batchSize": 128,
@@ -20,6 +20,7 @@
 "epochs": 5000,
 "activationFunction": "tanh",
 "fnnType": "REG",
-"wabTracking": true
+"wabTracking": true,
+"normalization": true
 }
 

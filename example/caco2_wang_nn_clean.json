@@ -1,7 +1,7 @@
 {
   "py/object": "dfpl.options.Options",
   "inputFile": "data/tdc/caco2_wang_nn_clean.csv",
-  "outputDir": "example/caco2_wang/train/comp",
+  "outputDir": "example/caco2_wang/train/comp_2",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",
@@ -19,9 +19,9 @@
   "epochs": 10000,
   "batchSize": 16 ,
   "activationFunction": "tanh",
-  "dropout": 0.01 ,
-  "learningRate" : 0.000015 ,
-  "l2reg" : 0.0 ,
+  "dropout":  0.11047594714412429,
+  "learningRate" : 0.00001817347366138639 ,
+  "l2reg" : 0.0,
   "fnnType": "REG",
   "normalize" : true
 }

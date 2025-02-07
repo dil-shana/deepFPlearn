@@ -1,0 +1,7 @@
+2025-02-04 13:37:14,790 - tensorflow - WARNING - No training configuration found in save file, so the model was *not* compiled. Compile it manually.
+2025-02-04 13:37:15,490 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 13:41:22,762 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 13:46:49,104 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 13:51:47,498 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 13:57:56,755 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-04 14:02:31,948 - tensorflow - INFO - Assets written to: /home/shanavas/PycharmProjects/deepFPlearn/example/fits/AR/ar-FILTERED/actual_saved_model/assets
