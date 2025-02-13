@@ -1,0 +1,2 @@
+2025-02-13 16:39:54,903 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-13 16:43:38,608 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.

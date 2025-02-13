@@ -1,7 +1,7 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "example/fits/AR/filtered_predict_data.csv",
-  "outputDir": "example/fits/AR/ar-FILTERED-2/",
+  "inputFile": "data/modified_zscore-ar_feb.csv",
+  "outputDir": "example/fits/AR/ar-feb_new",
   "ecModelDir": "example/models/generic_encoder/",
   "type": "smiles",
   "fpType": "topological",

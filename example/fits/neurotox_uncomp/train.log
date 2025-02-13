@@ -1,0 +1,6 @@
+2025-02-13 13:59:39,585 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-13 14:03:41,061 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-13 14:08:00,522 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-13 14:11:16,945 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-13 14:14:04,097 - tensorflow - WARNING - `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2025-02-13 14:17:02,238 - tensorflow - INFO - Assets written to: /home/shanavas/PycharmProjects/deepFPlearn/example/fits/neurotox_uncomp/actual_saved_model/assets
